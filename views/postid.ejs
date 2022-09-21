@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= Title %> | GoodFriends</title>
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <%- include('header') %>
+    <section class="section">
+        <div class="container">
+            <% if(onePost) {%>
+                <div class="box">
+                    <h5><%= onePost.title %></h5>
+                    <p>
+                        <span><%= onePost.author %></span>
+                        <span class="text-gray">| <%= onePost.createdAt %></span>
+                    </p>
+                    <div><%= onePost.content %></div>
+                </div>
+                <hr>
+                <div>
+                    <form action="/p/<%= onePost._id %>" method="post">
+                        <div>
+                            <textarea name="comment" placeholder="แสดงความคิดเห็น ..." rows="5"><%= values.comment %></textarea>
+                        </div>
+                        <div>
+                            <input type="text" name="comAuthor" placeholder="จากคุณ ..." value="<%= values.comAuthor %>">
+                        </div>
+                        <div>
+                            <button type="submit" class="button">คอมเมนต์</button>
+                        </div>
+                        <% if(errorMessage) {%>
+                            <p class="alert-msg">
+                                <span><%= errorMessage %></span>
+                            </p>
+                        <%}%>
+                    </form>
+                </div>
+                <hr>
+                <div>
+                    <% if(postComments.length>0) {%>
+                        <h5><%= postComments.length %> คอมเมนต์</h5>
+                        <% Object.values(postComments).forEach(function(postComments){%>
+                            <div class="box">
+                                <p><%= postComments.comment %></p>
+                                <div>
+                                    <span>
+                                        <%= postComments.comAuthor %> |
+                                    </span>
+                                    <span class="text-gray">
+                                        <%= postComments.createdAt %>
+                                    </span>
+                                </div>
+                            </div>
+                        <%})%>
+                    <%} else {%>
+                        <h4>
+                            <span>ไม่มีคอมเมนต์</span>
+                        </h4>
+                    <%}%>
+                </div>
+            <%} else {%>
+                <p>ไม่พบโพสต์ที่คุณต้องการ</p>
+            <%}%>
+        </div>
+    </section>
+    <%- include('footer') %>
+    <%- include('scrolltop') %>
+    <%- include('sitescript') %>
+</body>
+</html>

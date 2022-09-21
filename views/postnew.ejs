@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewPost</title>
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <%- include('header') %>
+    <section class="section">
+        <div class="container">
+                <h3>สร้างโพสต์ใหม่</h3>
+            <p class="mg-bt-large">ฝากถามเพื่อนๆ ได้เลย</p>
+            <form action="/p/new" method="post">
+                <div>
+                    <input type="text" name="title" placeholder="หัวข้อ" value="<%= values.title %>">
+                    <textarea name="content" placeholder="เนื้อหา" cols="30" rows="5"><%= values.content %></textarea>
+                    <input type="text" name="author" placeholder="จากคุณ" value="<%= values.author %>">
+                    <input type="checkbox" name="accepted" id="input-accepted">
+                    <label for="input-accepted">ข้อความยาวๆ ที่หลายคนเคยเจอแต่ไม่อยากอ่าน แค่กดยอมรับผ่านไป ~</label>
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="button">สร้างโพสต์ใหม่</button>
+                </div>
+                <div>
+                    <% if(errorMessage) {%>
+                        <p class="alert-msg"><%= errorMessage %></p>
+                    <%}%>
+                </div>
+            </form>
+        </div>
+    </section>
+    <%- include('footer') %>
+</body>
+</html>

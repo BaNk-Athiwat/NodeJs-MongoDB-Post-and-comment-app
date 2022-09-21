@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodFriends</title>
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <%- include('header') %>
+    <section class="section">
+        <div class="container">
+            <h2>สวัสดีเพื่อน</h2>
+            <p class="mg-bt-large">วันนี้เพื่อนมีอะไรจะถาม ...</p>
+            <% Object.values(allPost).forEach(function(allpost){%>
+                <div class="box">
+                    <h5><a href="/p/<%= allpost._id %>"><%= allpost.title %></a></h5>
+                    <p>
+                        <span><%= allpost.author %></span>
+                        <span class="text-gray">| <%= allpost.createdAt %></span>
+                    </p>
+                    <% if(allpost.commentP.length) {%>
+                        <div><%= allpost.commentP.length %> คอมเม้นท์</div>
+                    <%} else {%>
+                        <div>ไม่มีคอมเม้นท์</div>
+                    <%}%>
+                </div>
+            <%})%>
+        </div>
+    </section>
+    <%- include('footer') %>
+    <%- include('scrolltop') %>
+    <%- include('sitescript') %>
+</body>
+</html>
